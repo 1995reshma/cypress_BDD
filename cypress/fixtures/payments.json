@@ -1,0 +1,9 @@
+{
+  "paymentdetailsuser" : {
+    "nameoncard" : "John Doe",
+    "cardnumber" : "1234567890",
+    "cvc" : "311",
+    "expirationmonth" : "01",
+    "expirationyear" : "2026"
+}
+}
