@@ -70,7 +70,7 @@ import "@badeball/cypress-cucumber-preprocessor";
 7. Create a step definiton file - loginPageSteps.js and add the implementation for below step. Repeat the same for all steps
 
   Given("I visit the login page", () => {
-    LoginPage.visitLoginPage();
+     cy.visit("https://automationexercise.com/");
   });
 
 8. Step 6: (Optional) Organizing Tests with Page Object Model (POM)
@@ -80,7 +80,7 @@ cypress/pages/LoginPage.js
 
 class LoginPage {
   visit() {
-    cy.visit("https://www.saucedemo.com/");
+    cy.visit("https://automationexercise.com/");
   }
 
   enterUsername(username) {
