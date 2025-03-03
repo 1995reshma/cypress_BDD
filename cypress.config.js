@@ -11,11 +11,11 @@ module.exports = defineConfig({
       overwrite: true,
       html: true,
       json: true,
-      embeddedScreenshots: true, // Embed screenshots in the report
-      inlineAssets: true,        // Inline assets for portability
+      embeddedScreenshots: true, 
+      inlineAssets: true,        
       quiet: true,
     },
-    screenshotOnRunFailure: true, // Automatically take a screenshot on failure
+    screenshotOnRunFailure: true, 
     baseUrl: "https://automationexercise.com/", 
     specPattern: "cypress/e2e/features/**/*.feature",
     supportFile: "cypress/support/e2e.js",
@@ -25,24 +25,12 @@ module.exports = defineConfig({
     async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
       require("cypress-mochawesome-reporter/plugin")(on);
-
       on(
         "file:preprocessor",
         createBundler({
           plugins: [createEsbuildPlugin(config)], 
         })
       );
-
-      on("task", {
-        log() {
-          return null;
-        },
-        error(message) {
-          console.error("ERROR:", message);
-          return null;
-        },
-      });
-
       return config;
     },
   },
