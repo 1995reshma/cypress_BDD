@@ -1,33 +1,44 @@
+# 🚀 Overview
+This project is an automated testing framework built with Cypress, Cucumber BDD, and Page Object Model (POM). It enables behavior-driven development (BDD) for writing test cases in a human-readable format using Gherkin syntax.
 
-🚀 Overview
-This project is an automated testing framework built with Cypress, Cucumber BDD, and Page Object Model (POM).
-It enables behavior-driven development (BDD) for writing test cases in a human-readable format using Gherkin syntax.
+## 📌 Tech Stack
+- **Cypress** - JavaScript-based end-to-end testing framework
+- **Cucumber BDD** - Defines test cases using Gherkin syntax
+- **Page Object Model (POM)** - Enhances maintainability and reusability
+- **Mochawesome** - Generates rich HTML test reports
 
-📌 Tech Stack
-Cypress - JavaScript-based end-to-end testing framework
-Cucumber BDD - Defines test cases using Gherkin syntax
-Page Object Model (POM) - Enhances maintainability and reusability
-Mochawesome - Generates rich HTML test reports
+---
 
-⚙️ **Installation & Setup**
-1️⃣ Clone the Repository
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the Repository
+```sh
 git clone https://github.com/your-username/cypress_BDD.git
 cd cypress_BDD
+```
 
-2️⃣ **Install Dependencies and configure cypress**
-1. Initialize a package.json file:
+### 2️⃣ Install Dependencies and Configure Cypress
+
+#### **Step 1: Initialize a package.json file**
+```sh
 npm init -y
+```
 
-2. Install Cypress:
+#### **Step 2: Install Cypress**
+```sh
 npm install cypress --save-dev
+```
 
-3. Install Cucumber Plugin for Cypress
-We need the cypress-cucumber-preprocessor package to write tests in Gherkin syntax.
+#### **Step 3: Install Cucumber Plugin for Cypress**
+We need the `cypress-cucumber-preprocessor` package to write tests in Gherkin syntax.
+```sh
 npm install @badeball/cypress-cucumber-preprocessor --save-dev
+```
 
-4. Configure Cypress to Use Cucumber
-Update cypress.config.js to include the Cucumber preprocessor.
+#### **Step 4: Configure Cypress to Use Cucumber**
+Update `cypress.config.js` to include the Cucumber preprocessor.
 
+```javascript
 const { defineConfig } = require("cypress");
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
 const { addCucumberPreprocessorPlugin } = require("@badeball/cypress-cucumber-preprocessor");
@@ -42,23 +53,27 @@ module.exports = defineConfig({
       on(
         "file:preprocessor",
         createBundler({
-          plugins: [createEsbuildPlugin(config)], 
+          plugins: [createEsbuildPlugin(config)],
         })
       );
       return config;
     },
   },
 });
+```
 
+#### **Step 5: Create a `cypress/support/e2e.js` File**
+Modify `cypress/support/e2e.js` to include:
 
-5. Create a cypress/support/e2e.js File
-Modify cypress/support/e2e.js to include:
-
+```javascript
 import "@badeball/cypress-cucumber-preprocessor";
+```
 
-6. Create the BDD Test with filename - LoginPage.feature
+#### **Step 6: Create the BDD Test (`LoginPage.feature`)**
+Create a feature file with the following content:
 
-   Feature: Login Functionality
+```
+Feature: Login Functionality
 
   @smoke
   Scenario: User logs in with valid credentials
@@ -66,18 +81,23 @@ import "@badeball/cypress-cucumber-preprocessor";
     When I enter valid credentials
     And I click the login button
     Then I verify the title of the application
+```
 
-7. Create a step definiton file - loginPageSteps.js and add the implementation for below step. Repeat the same for all steps
+#### **Step 7: Create a Step Definition File (`loginPageSteps.js`)**
+Implement the following step definition (repeat for other steps as needed):
 
-  Given("I visit the login page", () => {
-     cy.visit("https://automationexercise.com/");
-  });
+```javascript
+Given("I visit the login page", () => {
+   cy.visit("https://automationexercise.com/");
+});
+```
 
-8. Step 6: (Optional) Organizing Tests with Page Object Model (POM)
+#### **Step 8: (Optional) Organizing Tests with Page Object Model (POM)**
 To keep your tests modular and reusable, use the Page Object Model (POM).
 
-cypress/pages/LoginPage.js
+Create `cypress/pages/LoginPage.js` and define methods:
 
+```javascript
 class LoginPage {
   visit() {
     cy.visit("https://automationexercise.com/");
@@ -86,15 +106,27 @@ class LoginPage {
   enterUsername(username) {
     cy.get('[data-test="username"]').type(username);
   }
+}
 
-3️⃣ Run Cypress Tests
+export default LoginPage;
+```
 
-📌 Run Tests in Cypress UI
+---
+
+## 3️⃣ Run Cypress Tests
+
+### 📌 Run Tests in Cypress UI
+```sh
 npx cypress open
+```
 
-📊 Generating Test Reports (Mochawesome)
-Run Tests & Generate Reports: Install cypress-mochawesome-reporter plugin to generate reports
-npx cypress run 
+### 📊 Generating Test Reports (Mochawesome)
+Run tests & generate reports using the `cypress-mochawesome-reporter` plugin:
+```sh
+npx cypress run
+```
 
-Reshma
-This README provides a detailed guide to setting up, using, and troubleshooting the Cypress + Cucumber BDD + POM framework. 🚀 Let me know if you need any modifications! 
+---
+
+This README provides a detailed guide to setting up, using, and troubleshooting the Cypress + Cucumber BDD + POM framework. 🚀 Let me know if you need any modifications!
+
