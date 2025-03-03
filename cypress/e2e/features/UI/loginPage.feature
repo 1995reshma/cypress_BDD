@@ -12,5 +12,4 @@ Feature: Login Functionality
     Given I visit the login page
     When I enter invalid credentials
     And I click the login button
-    Then I verify the title of the application
-#Then the error message is displayed
+    Then the error message is displayed
