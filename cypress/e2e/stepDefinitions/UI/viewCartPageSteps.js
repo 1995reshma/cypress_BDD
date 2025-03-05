@@ -2,6 +2,7 @@ import { Given, When, Then, Before } from "@badeball/cypress-cucumber-preprocess
 import {Given as And } from "@badeball/cypress-cucumber-preprocessor";
 import ProductPage from "../../../pages/productPage";
 import ViewCartPage from "../../../pages/ViewCartPage";
+import PaymentPage from "../../../pages/PaymentPage";
 
 Before({ tags: "@viewcartpage" }, () => {
   cy.logInToApplication();
@@ -31,7 +32,7 @@ When("I click proceed to checkout", () => {
 
 And("make payment after placing the order", () => {
   ViewCartPage.clickPlaceOrderButton();
-  cy.makePayment(); 
+  PaymentPage.makePayment(); 
 });
 
 Then("I see the order placed message", () => {
