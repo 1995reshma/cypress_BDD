@@ -34,6 +34,7 @@ npm install cypress --save-dev
 We need the `cypress-cucumber-preprocessor` package to write tests in Gherkin syntax.
 ```sh
 npm install @badeball/cypress-cucumber-preprocessor --save-dev
+npm install @bahmutov/cypress-esbuild-preprocessor --save-dev
 ```
 
 #### **Step 4: Configure Cypress to Use Cucumber**
