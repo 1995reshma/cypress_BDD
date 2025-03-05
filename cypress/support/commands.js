@@ -22,19 +22,6 @@ Cypress.Commands.add('addProductToCart', () => {
 });
 })
 
-Cypress.Commands.add('makePayment', () => { 
-  cy.fixture("payments").then((data) => {
-    const paymentDetail = data.paymentdetailsuser
-    cy.contains("Payment").should("be.visible");
-    cy.get(PaymentPage.PaymentPageElement["nameOnCard"]).type(paymentDetail.nameoncard);
-    cy.get(PaymentPage.PaymentPageElement["cardNumber"]).type(paymentDetail.cardnumber);
-    cy.get(PaymentPage.PaymentPageElement["cvc"]).type(paymentDetail.cvc);
-    cy.get(PaymentPage.PaymentPageElement["expiryMonth"]).type(paymentDetail.expirationmonth);
-    cy.get(PaymentPage.PaymentPageElement["expiryYear"]).type(paymentDetail.expirationyear);
-    cy.get(PaymentPage.PaymentPageElement["submitBtn"]).click();
-});
-})
-
 Cypress.Commands.add('createUserAccountViaAPI', () => { 
   cy.fixture('userData').then((userData) => {
     const email = `johndoe${Date.now()}@test.com`;
