@@ -1,5 +1,9 @@
 name: Cypress Tests
-on: [push]
+
+on:
+  push:
+    branches:
+      - main # Or any branch you'd like to trigger the tests on
 
 jobs:
   cypress-run:
@@ -7,29 +11,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [chrome, firefox, edge] # List of browsers
-        containers: [1, 2] # Uses 2 parallel instances per browser
+        browser: [chrome, firefox, edge] # List of browsers for parallelization
 
     steps:
-      - name: Install Microsoft Edge
-        run: |
-          curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-          sudo apt-add-repository "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
-          sudo apt update
-          sudo apt install microsoft-edge-stable
-
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2 # Checkout code from the repo
 
-      - name: Cypress run on ${{ matrix.browser }}
-        uses: cypress-io/github-action@v6
+      - name: Install Dependencies
+        run: npm ci # Use npm ci to install dependencies from package-lock.json
+
+      - name: Cypress Run on ${{ matrix.browser }}
+        uses: cypress-io/github-action@v6 # Use latest Cypress GitHub Action
         with:
           start: npm start
-          browser: ${{ matrix.browser }} # Run on the specified browser
-          record: true
-          parallel: true # Runs tests in parallel across instances
+          browser: ${{ matrix.browser }} # Run tests on the specified browser
+          record: true # Record tests on Cypress Dashboard
+          parallel: true # Run tests in parallel across containers
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
-          BROWSER: ${{ matrix.browser }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} # Required for recording tests
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token for API access
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }} # Your Cypress project ID
