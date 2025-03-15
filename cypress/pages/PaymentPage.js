@@ -3,7 +3,7 @@ class PaymentPage {
     nameOnCard : "[data-qa='name-on-card']",
     cardNumber : "[data-qa='card-number']",
     cvc : "[data-qa='cvc']",
-    expiryMonth : "[data-qa='expiry-month']",
+    expiryMonth : "[data-qa='expiry-mont']",
     expiryYear : "[data-qa='expiry-year']",
     submitBtn : "#submit"
   }

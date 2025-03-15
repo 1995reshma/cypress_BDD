@@ -1,7 +1,7 @@
 class ProductPage {
   productPageElement = {
     searchProduct : "#search_product",
-    submitSearchBtn : "#submit_search",
+    submitSearchBtn : "#submit_searches",
     name : "#name",
     email : "#email",
     review : "textarea#review",
