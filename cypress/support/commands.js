@@ -1,6 +1,5 @@
 import LoginPage from "../pages/LoginPage";
 import ProductPage from "../pages/productPage";
-import PaymentPage from "../pages/PaymentPage";
 
 Cypress.Commands.add('logInToApplication', () => { 
   cy.fixture("credentials").then((credential) => {
@@ -40,7 +39,7 @@ Cypress.Commands.add('createUserAccountViaAPI', () => {
       form: true
     }).then((response) => {
       const res = JSON.parse(response.body);
-      cy.log("Response is: " + res.body);
+      cy.log("Response is: " + JSON.stringify(res));
       expect(response.status).to.eq(200);
       expect(res).to.have.property('message', 'User created!');
     });

@@ -1,8 +1,8 @@
 class LoginPage {
   loginPageElement = {
-    email : "[name='email']",
-    password : "[name='password']",
-    loginBtn : "[data-qa='login-button']",
+    email : "[data-qa='login-email']",
+    password : "[data-qa='login-password']",
+    loginBtn : "[data-qa='login-button']"
   }
 
   visitLoginPage(){
