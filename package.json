@@ -9,7 +9,8 @@
     "test:all": "npx cypress run --spec '**/*.feature' --browser chrome --headed",
     "merge:reports": "npx mochawesome-merge cypress/reports/*.json -o cypress/reports/merged-report.json",
     "generate:report": "npx marge cypress/reports/merged-report.json --reportDir cypress/reports --reportFilename merged-report",
-    "test:report": "npm run test:all && npm run merge:reports && npm run generate:report"
+    "test:report": "npm run test:all && npm run merge:reports && npm run generate:report",
+    "start": "npx cypress run --spec '**/*.feature' --browser chrome --headed"
   },
   "keywords": [],
   "author": "",

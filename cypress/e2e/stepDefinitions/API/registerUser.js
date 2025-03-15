@@ -1,6 +1,6 @@
-import { When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-When("I create a user account through API", () => {
+Given("I create a user account through API", () => {
   cy.createUserAccountViaAPI();
 });
 

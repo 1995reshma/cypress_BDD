@@ -11,3 +11,14 @@ Feature: Product Page Functionality
       | productOne | productTwo | productThree     |
       | Blue Top   | Men Tshirt | Sleeveless Dress |
 
+  Scenario Outline: User searches for products and adds them to the cart
+    Given I am on the product page
+    When I search product "<product>"
+    And click on view product
+    Then I submit my review
+    And I verify my review has been submitted successfully
+    Examples:
+      | product          |
+      | Blue Top         |
+      | Men Tshirt       |
+      | Sleeveless Dress |
