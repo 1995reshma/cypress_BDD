@@ -11,6 +11,13 @@ jobs:
         containers: [1, 2] # Uses 2 parallel instances per browser
 
     steps:
+      - name: Install Microsoft Edge
+        run: |
+          curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
+          sudo apt update
+          sudo apt install microsoft-edge-stable
+
       - name: Checkout Repository
         uses: actions/checkout@v4
 
