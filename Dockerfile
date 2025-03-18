@@ -3,7 +3,7 @@ FROM cypress/browsers:node-22.14.0-chrome-134.0.6998.88-1-ff-136.0.1-edge-134.0.
 WORKDIR /e2e
 
 COPY ./package.json .
-COPY ./cypress.config.ts .
+COPY ./cypress.config.js .
 COPY ./cypress ./cypress
 
 RUN npm i &&\
