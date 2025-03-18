@@ -1,0 +1,56 @@
+name: cross browser end-to-end testing
+
+on: [push]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Run docker-compose
+        run: docker-compose up -d e2e-chrome e2e-firefox e2e-edge e2e-electron
+
+      - name: Wait for services to start
+        run: docker-compose logs -f
+
+      - name: Upload Chrome artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: chrome-artifacts
+          path: |
+            ./artifacts/chrome/videos
+            ./artifacts/chrome/screenshots
+          if-no-files-found: ignore
+          retention-days: 5
+
+      - name: Upload Firefox artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: firefox-artifacts
+          path: ./artifacts/firefox/screenshots
+          if-no-files-found: ignore
+          retention-days: 5
+
+      - name: Upload Edge artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: edge-artifacts
+          path: |
+            ./artifacts/edge/videos
+            ./artifacts/edge/screenshots
+          if-no-files-found: ignore
+          retention-days: 5
+
+      - name: Upload Electron artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: electron-artifacts
+          path: |
+            ./artifacts/electron/videos
+            ./artifacts/electron/screenshots
+          if-no-files-found: ignore
+          retention-days: 5
