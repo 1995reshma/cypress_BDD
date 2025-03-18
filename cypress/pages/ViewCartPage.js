@@ -1,7 +1,7 @@
 class ViewCartPage {
   viewCartPageElement = {
     productList : "tbody tr",
-    orderPlacedMessage : "[data-qa='order-placed']"
+    orderPlacedMessage : "[data-qa='order-placeded']"
   }
 
   visitViewCartPage(){
