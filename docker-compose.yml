@@ -3,39 +3,43 @@ version: '3.8'
 services:
   e2e-chrome:
     build: .
-    command: '-b chrome --record --key $CYPRESS_RECORD_KEY'
+    command: '-b chrome --record --parallel --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
       - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
+      - CI_BUILD_ID=${CI_BUILD_ID}
     volumes:
       - ./artifacts/chrome/videos:/e2e/cypress/videos
       - ./artifacts/chrome/screenshots:/e2e/cypress/screenshots
 
   e2e-firefox:
     build: .
-    command: '-b firefox -c video=false --record --key $CYPRESS_RECORD_KEY'
+    command: '-b firefox -c video=false --record --parallel --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
       - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
+      - CI_BUILD_ID=${CI_BUILD_ID}
     volumes:
       - ./artifacts/firefox/screenshots:/e2e/cypress/screenshots
 
   e2e-edge:
     build: .
-    command: '-b edge --record --key $CYPRESS_RECORD_KEY'
+    command: '-b edge --record --parallel --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
       - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
+      - CI_BUILD_ID=${CI_BUILD_ID}
     volumes:
       - ./artifacts/edge/videos:/e2e/cypress/videos
       - ./artifacts/edge/screenshots:/e2e/cypress/screenshots
 
   e2e-electron:
     build: .
-    command: '--record --key $CYPRESS_RECORD_KEY'
+    command: '--record --parallel --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
       - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
+      - CI_BUILD_ID=${CI_BUILD_ID}
     volumes:
       - ./artifacts/electron/videos:/e2e/cypress/videos
       - ./artifacts/electron/screenshots:/e2e/cypress/screenshots
