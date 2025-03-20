@@ -3,26 +3,35 @@ version: '3.8'
 services:
   e2e-chrome:
     build: .
-    command: '-b chrome'
+    command: '-b chrome --record --key $CYPRESS_RECORD_KEY'
+    environment:
+      - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
     volumes:
       - ./artifacts/chrome/videos:/e2e/cypress/videos
       - ./artifacts/chrome/screenshots:/e2e/cypress/screenshots
 
   e2e-firefox:
     build: .
-    command: '-b firefox -c video=false'
+    command: '-b firefox -c video=false --record --key $CYPRESS_RECORD_KEY'
+    environment:
+      - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
     volumes:
       - ./artifacts/firefox/screenshots:/e2e/cypress/screenshots
 
   e2e-edge:
     build: .
-    command: '-b edge'
+    command: '-b edge --record --key $CYPRESS_RECORD_KEY'
+    environment:
+      - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
     volumes:
       - ./artifacts/edge/videos:/e2e/cypress/videos
       - ./artifacts/edge/screenshots:/e2e/cypress/screenshots
 
   e2e-electron:
     build: .
+    command: '--record --key $CYPRESS_RECORD_KEY'
+    environment:
+      - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
     volumes:
       - ./artifacts/electron/videos:/e2e/cypress/videos
       - ./artifacts/electron/screenshots:/e2e/cypress/screenshots

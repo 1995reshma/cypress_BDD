@@ -1,11 +1,11 @@
-name: cross browser end-to-end testing
+name: Cross Browser End-to-End Testing
 
 on: [push]
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
 
     steps:
       - name: Checkout 🛎
@@ -16,11 +16,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y docker-compose
 
-      - name: Run docker-compose
+      - name: Run docker-compose with Cypress Cloud recording
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         run: docker-compose up -d e2e-chrome e2e-firefox e2e-edge e2e-electron
 
-      - name: Wait for services to start
-        run: docker-compose logs -f
+      - name: Wait for tests to complete
+        run: sleep 60 && docker-compose logs -f
 
       - name: Upload Chrome artifacts
         uses: actions/upload-artifact@v4
