@@ -3,7 +3,7 @@ version: '3.8'
 services:
   e2e-chrome:
     build: .
-    command: '-b chrome --record --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
+    command: '-b chrome --record --group chrome --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
       - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
@@ -14,7 +14,7 @@ services:
 
   e2e-firefox:
     build: .
-    command: '-b firefox --record --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
+    command: '-b firefox --record --group firefox --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
       - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
@@ -24,7 +24,7 @@ services:
 
   e2e-edge:
     build: .
-    command: '-b edge --record --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
+    command: '-b edge --record --group edge --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
       - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
@@ -35,7 +35,7 @@ services:
 
   e2e-electron:
     build: .
-    command: '--record --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
+    command: '--record --group electron --key $CYPRESS_RECORD_KEY --ci-build-id $CI_BUILD_ID'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
       - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
