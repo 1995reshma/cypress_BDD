@@ -1,14 +1,18 @@
-name: Record Cross Browser End-to-End Testing to cypress cloud
+name: Record Cross Browser End-to-End Testing to Cypress Cloud
 
 on: [push]
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
+
+    strategy:
+      matrix:
+        browser: [chrome, firefox, edge, electron] # Define matrix to run each browser separately
 
     steps:
-      - name: Checkout 🛎
+      - name: Checkout Repository 🛎
         uses: actions/checkout@v4
 
       - name: Set up Docker
@@ -16,50 +20,23 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y docker-compose
 
-      - name: Run docker-compose with Cypress Cloud recording
+      - name: Run Cypress in Parallel on ${{ matrix.browser }}
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
-          CI_BUILD_ID: ${{ github.run_id }} # Ensures a single build ID across all browsers
-        run: docker-compose up -d e2e-chrome e2e-firefox e2e-edge e2e-electron
+          CI_BUILD_ID: ${{ github.run_id }}
+        run: |
+          docker-compose up -d e2e-${{ matrix.browser }}
+          sleep 60
+          docker-compose logs -f
+          docker-compose down
 
-      - name: Wait for tests to complete
-        run: sleep 60 && docker-compose logs -f
-
-      - name: Upload Chrome artifacts
+      - name: Upload Test Artifacts for ${{ matrix.browser }}
         uses: actions/upload-artifact@v4
         with:
-          name: chrome-artifacts
+          name: ${{ matrix.browser }}-artifacts
           path: |
-            ./artifacts/chrome/videos
-            ./artifacts/chrome/screenshots
-          if-no-files-found: ignore
-          retention-days: 5
-
-      - name: Upload Firefox artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: firefox-artifacts
-          path: ./artifacts/firefox/screenshots
-          if-no-files-found: ignore
-          retention-days: 5
-
-      - name: Upload Edge artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: edge-artifacts
-          path: |
-            ./artifacts/edge/videos
-            ./artifacts/edge/screenshots
-          if-no-files-found: ignore
-          retention-days: 5
-
-      - name: Upload Electron artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: electron-artifacts
-          path: |
-            ./artifacts/electron/videos
-            ./artifacts/electron/screenshots
+            ./artifacts/${{ matrix.browser }}/videos
+            ./artifacts/${{ matrix.browser }}/screenshots
           if-no-files-found: ignore
           retention-days: 5
