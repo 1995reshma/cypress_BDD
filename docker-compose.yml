@@ -6,6 +6,7 @@ services:
     command: '-b chrome --record --key $CYPRESS_RECORD_KEY'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
+      - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
     volumes:
       - ./artifacts/chrome/videos:/e2e/cypress/videos
       - ./artifacts/chrome/screenshots:/e2e/cypress/screenshots
@@ -15,6 +16,7 @@ services:
     command: '-b firefox -c video=false --record --key $CYPRESS_RECORD_KEY'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
+      - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
     volumes:
       - ./artifacts/firefox/screenshots:/e2e/cypress/screenshots
 
@@ -23,6 +25,7 @@ services:
     command: '-b edge --record --key $CYPRESS_RECORD_KEY'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
+      - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
     volumes:
       - ./artifacts/edge/videos:/e2e/cypress/videos
       - ./artifacts/edge/screenshots:/e2e/cypress/screenshots
@@ -32,6 +35,7 @@ services:
     command: '--record --key $CYPRESS_RECORD_KEY'
     environment:
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
+      - CYPRESS_PROJECT_ID=${CYPRESS_PROJECT_ID}
     volumes:
       - ./artifacts/electron/videos:/e2e/cypress/videos
       - ./artifacts/electron/screenshots:/e2e/cypress/screenshots
