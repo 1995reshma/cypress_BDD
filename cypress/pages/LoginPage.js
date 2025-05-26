@@ -10,11 +10,11 @@ class LoginPage {
   }
 
   enterUserName(userNameData) {
-    cy.get(this.loginPageElement.email).eq(0).type(userNameData);
+    cy.get(this.loginPageElement.email).type(userNameData);
   }
 
   enterPassword(passwordData) {
-    cy.get(this.loginPageElement.password).eq(0).type(passwordData);
+    cy.get(this.loginPageElement.password).type(passwordData);
   }
 
   clickLoginButton() {
