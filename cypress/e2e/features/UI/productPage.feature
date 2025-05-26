@@ -22,3 +22,4 @@ Feature: Product Page Functionality
       | Blue Top         |
       | Men Tshirt       |
       | Sleeveless Dress |
+      | Stylish Dress    |
