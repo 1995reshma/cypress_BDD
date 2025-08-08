@@ -14,8 +14,8 @@ This project is an automated testing framework built with Cypress, Cucumber BDD,
 ### 1️⃣ Clone the Repository and create a branch
 ```sh
 git clone https://github.com/your-username/cypress_BDD.git
-git checkout -b "loginfeature"
 cd cypress_BDD
+git checkout -b "loginfeature"
 ```
 
 ### 2️⃣ Install Dependencies and Configure Cypress
