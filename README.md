@@ -37,7 +37,10 @@ npm install @badeball/cypress-cucumber-preprocessor --save-dev
 npm install @bahmutov/cypress-esbuild-preprocessor --save-dev
 ```
 
-#### **Step 4: Configure Cypress to Use Cucumber**
+#### **Step 4: Install cypress-mochawesome-reporter plugin**
+npm install --save-dev cypress-mochawesome-reporter
+
+#### **Step 5: Configure Cypress to Use Cucumber**
 Update `cypress.config.js` to include the Cucumber preprocessor.
 
 ```javascript
@@ -64,14 +67,14 @@ module.exports = defineConfig({
 });
 ```
 
-#### **Step 5: Create a `cypress/support/e2e.js` File**
+#### **Step 6: Create a `cypress/support/e2e.js` File**
 Modify `cypress/support/e2e.js` to include:
 
 ```javascript
 import "@badeball/cypress-cucumber-preprocessor";
 ```
 
-#### **Step 6: Create the BDD Test (`LoginPage.feature`)**
+#### **Step 7: Create the BDD Test (`LoginPage.feature`)**
 Create a feature file with the following content:
 
 ```
@@ -85,7 +88,7 @@ Feature: Login Functionality
     Then I verify the title of the application
 ```
 
-#### **Step 7: Create a Step Definition File (`loginPageSteps.js`)**
+#### **Step 8: Create a Step Definition File (`loginPageSteps.js`)**
 Implement the following step definition (repeat for other steps as needed):
 
 ```javascript
@@ -94,7 +97,7 @@ Given("I visit the login page", () => {
 });
 ```
 
-#### **Step 8: (Optional) Organizing Tests with Page Object Model (POM)**
+#### **Step 9: (Optional) Organizing Tests with Page Object Model (POM)**
 To keep your tests modular and reusable, use the Page Object Model (POM).
 
 Create `cypress/pages/LoginPage.js` and define methods:
